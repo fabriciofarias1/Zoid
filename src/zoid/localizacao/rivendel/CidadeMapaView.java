@@ -63,6 +63,7 @@ public class CidadeMapaView extends javax.swing.JFrame {
         Carregar_btn = new javax.swing.JButton();
         btn_limpar = new javax.swing.JButton();
         label1 = new java.awt.Label();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -136,6 +137,13 @@ public class CidadeMapaView extends javax.swing.JFrame {
 
         label1.setText("Cadastro para construção do Local");
 
+        jButton1.setText("Deletar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,6 +157,8 @@ public class CidadeMapaView extends javax.swing.JFrame {
                                 .addComponent(Salvar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Carregar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_limpar))
                             .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,7 +258,8 @@ public class CidadeMapaView extends javax.swing.JFrame {
                     .addComponent(Salvar_btn, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Carregar_btn)
-                        .addComponent(btn_limpar)))
+                        .addComponent(btn_limpar)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -275,6 +286,10 @@ public class CidadeMapaView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_qtd_pontes_jtxtActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Carregar_btn;
@@ -283,6 +298,7 @@ public class CidadeMapaView extends javax.swing.JFrame {
     private javax.swing.JTextField Nome_Cidade_jtxt;
     private javax.swing.JButton Salvar_btn;
     private javax.swing.JButton btn_limpar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -329,6 +345,11 @@ public class CidadeMapaView extends javax.swing.JFrame {
     public void setListenerCarregar(ActionListener z) {
         Carregar_btn.addActionListener(z);
     }
+    
+    public void setListenerDeletar(ActionListener z) {
+        jButton1.addActionListener(z);
+    }
+    
 
     public void setCarregardaLista(MouseListener z) {
         jList1.addMouseListener(z);

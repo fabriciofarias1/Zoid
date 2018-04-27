@@ -60,7 +60,7 @@ public class CidadeMapa extends LocalMapa {
 
     }
 
-    protected String nomeArqTemplate = "test\\template.txt";
+    protected String nomeArq = "test\\zoid.txt";
 
     @Override
     public void salvarLocal(FileWriter fw) {
@@ -76,7 +76,7 @@ public class CidadeMapa extends LocalMapa {
                     + this.posX + ","
                     + this.posY
                     + "\r\n");
-            out.println("Registro foi gravado com sucesso no arquivo zoid.txt");
+            System.out.println("Arquivo foi salvo com sucesso.");
         } catch (IOException ex) {
 
         }
@@ -87,7 +87,7 @@ public class CidadeMapa extends LocalMapa {
 
         FileWriter fw;
         try {
-            fw = new FileWriter(nomeArqTemplate, this.append);
+            fw = new FileWriter(nomeArq, this.append);
             fw.write(this.nomeLocal + ","
                     + this.tipo_local + ","
                     + this.dono_local + ","
@@ -151,7 +151,7 @@ public class CidadeMapa extends LocalMapa {
 
     public void carregaLocal() {
         try {
-            FileReader fr = new FileReader(this.nomeArqTemplate);
+            FileReader fr = new FileReader(this.nomeArq);
             BufferedReader br = new BufferedReader(fr);
 
             String linha = br.readLine();

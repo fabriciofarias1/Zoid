@@ -1,3 +1,0 @@
-Rivendel,Cidade,Rei Arthur,5,2,100000,100000,10.0,20.0
-Rivendel 2,Cidade 2,Rei Arthur 2,52,22,100002,100002.0,10.2,20.2
-Rivendel,Rei Arthur,Cidade,5,2,100000,100000.0,10.0,20.0

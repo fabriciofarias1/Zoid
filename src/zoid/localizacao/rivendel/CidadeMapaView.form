@@ -38,6 +38,8 @@
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="Carregar_btn" linkSize="2" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="btn_limpar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="label1" alignment="0" min="-2" pref="419" max="-2" attributes="0"/>
@@ -162,6 +164,7 @@
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="Carregar_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_limpar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -304,6 +307,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastro para constru&#xe7;&#xe3;o do Local"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Deletar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

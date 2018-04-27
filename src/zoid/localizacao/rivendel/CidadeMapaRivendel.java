@@ -15,7 +15,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import static java.lang.System.out;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -36,11 +38,10 @@ import javax.swing.ListModel;
 public class CidadeMapaRivendel {
 
     private ArrayList<CidadeMapa> listaCidades;
-    private ArrayList<CidadeMapaTemplate> listaCidadesTemlate;
+   
 
     private CidadeMapaView viewC;
-    protected String nomeArq = "C:\\Zoid\\zoid.txt";
-    protected String nomeArqTemplate = "test\\template.txt";
+    protected String nomeArq = "test\\zoid.txt";
     private javax.swing.JTextField Nome_Cidade_jtxt;
     private javax.swing.JTextField Dono_local_jtxt;
     private javax.swing.JTextField posX_jtxt;
@@ -55,12 +56,12 @@ public class CidadeMapaRivendel {
 
         viewC = new CidadeMapaView();
         listaCidades = new ArrayList<CidadeMapa>();
-        listaCidadesTemlate = new ArrayList<CidadeMapaTemplate>();
         viewC.setListenerInserir(new CidadeMapaRivendel.InserirListener());
         viewC.setListenerSalvar(new CidadeMapaRivendel.SalvarListener());
         viewC.setListenerCarregar(new CidadeMapaRivendel.CarregarListener());
         viewC.setLimpar(new CidadeMapaRivendel.Limpar());
         viewC.setCarregardaLista(new CidadeMapaRivendel.CarregarLista());
+        viewC.setListenerDeletar(new CidadeMapaRivendel.DeletarListener());
 
     }
 
@@ -72,26 +73,28 @@ public class CidadeMapaRivendel {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println("Teste");
+            //System.out.println("Teste");
             int index = viewC.getjList1().getSelectedIndex();
-//            System.out.println(viewC.getjList1().getSelectedValue().toString());
+            //System.out.println(viewC.getjList1().getSelectedValue().toString());
 
             String selected = viewC.getjList1().getSelectedValuesList().toString();
-            System.out.println(selected);
+            //System.out.println(selected);
 
             String testoreplace = selected.replace("[", "").replace("]", "");
 
             String texto[] = testoreplace.split(",");
 
             viewC.setNome_Cidade_jtxt(texto[0]);
-            viewC.setDono_local_jtxt(texto[1]);
-            viewC.setTipo_local_jtxt(texto[2]);
+            viewC.setTipo_local_jtxt(texto[1]);
+            viewC.setDono_local_jtxt(texto[2]);
             viewC.setQtd_lagos_jtxt(texto[3]);
             viewC.setQtd_pontes_jtxt(texto[4]);
             viewC.setQtd_habitantes_jtxt(texto[5]);
             viewC.setTamanho_cidade_jtxt(texto[6]);
             viewC.setPosX_jtxt(texto[7]);
             viewC.setPosY_jtxt(texto[8]);
+            
+            //listaCidades.clear();
 
         }
 
@@ -127,27 +130,18 @@ public class CidadeMapaRivendel {
 
             FileReader fr = null;
             try {
-                fr = new FileReader(nomeArqTemplate);
+                fr = new FileReader(nomeArq);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(CidadeMapaRivendel.class.getName()).log(Level.SEVERE, null, ex);
             }
             BufferedReader br = new BufferedReader(fr);
-            CidadeMapaTemplate f = new CidadeMapaTemplate(nomeArq, nomeArq, nomeArq, 0, 0, 0, 0, 0, 0);
-
-            //viewC.setNome_Cidade_jtxt(Nome_Cidade_jtxt);
-            //viewC.setDono_local_jtxt(Dono_local_jtxt);
-//            viewC.setTipo_local_jtxt(tipo_local_jtxt);
-//            viewC.setQtd_lagos_jtxt(qtd_lagos_jtxt);
-//            viewC.setQtd_pontes_jtxt(qtd_pontes_jtxt);
-//            viewC.setQtd_habitantes_jtxt(qtd_habitantes_jtxt);
-//            viewC.setTamanho_cidade_jtxt(tamanho_cidade_jtxt);
-//            viewC.setPosX_jtxt(posX_jtxt);
-//            viewC.setPosY_jtxt(posY_jtxt);
+            CidadeMapa f = new CidadeMapa(nomeArq, nomeArq, nomeArq, 0, 0, 0, 0, 0, 0);
+            
             boolean linhaLida = f.carregaLocal(br);
             while (linhaLida) {
-                listaCidadesTemlate.add(f);
+                listaCidades.add(f);
                 viewC.addElementoLista(f);
-                f = new CidadeMapaTemplate();
+                f = new CidadeMapa(nomeArq, nomeArq, nomeArq, 0, 0, 0, 0, 0, 0);
                 linhaLida = f.carregaLocal(br);
 
             }
@@ -155,11 +149,13 @@ public class CidadeMapaRivendel {
                 br.close();
             } catch (IOException ex) {
                 Logger.getLogger(CidadeMapaRivendel.class.getName()).log(Level.SEVERE, null, ex);
+                
             }
             try {
                 fr.close();
             } catch (IOException ex) {
                 Logger.getLogger(CidadeMapaRivendel.class.getName()).log(Level.SEVERE, null, ex);
+                
             }
 
         }
@@ -185,6 +181,7 @@ public class CidadeMapaRivendel {
                 ///--------------------///
                 viewC.addElementoLista(f);
                 ///--------------------///
+                
             } catch (Exception e) {
                 System.out.println(e);
 
@@ -197,14 +194,14 @@ public class CidadeMapaRivendel {
 
     public class SalvarListener implements ActionListener {
 
-        protected boolean append = true;
+        //protected boolean append = true;
 
         @Override
         public void actionPerformed(ActionEvent c) {
             try {
                 //------------------//
-
-                FileWriter fw = new FileWriter(nomeArqTemplate, append);
+                
+                FileWriter fw = new FileWriter(nomeArq);
                 Iterator<CidadeMapa> it = listaCidades.iterator();
                 while (it.hasNext()) {
                     CidadeMapa f = it.next();
@@ -214,7 +211,7 @@ public class CidadeMapaRivendel {
                 }
                 fw.close();
             } catch (IOException ex) {
-
+              JOptionPane.showMessageDialog(viewC, "Falha ao salvar o arquivo.");
             }
         }
     }
@@ -227,5 +224,42 @@ public class CidadeMapaRivendel {
             viewC.limpar();
         }
     }
+    
+    public class DeletarListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent d) {
+
+            DefaultListModel model = (DefaultListModel) viewC.getjList1().getModel();
+            int selectedIndex = viewC.getjList1().getSelectedIndex();
+            if (selectedIndex != -1) {
+                model.remove(selectedIndex);
+                //viewC.limpar();
+
+                System.out.println(viewC.getjList1().getModel());
+                int i=0;
+                try {
+                    FileWriter fw = new FileWriter(nomeArq);
+                   
+                    
+                    while (i>viewC.getjList1().getModel().getSize()) {
+                       
+                        fw.write(viewC.getjList1().getModel().toString());
+                        fw.close();
+                    }
+                    
+
+                } catch (IOException ex) {
+                    Logger.getLogger(CidadeMapaRivendel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+    }
+
+
+
+    
+    
 
 }
