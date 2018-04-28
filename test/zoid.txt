@@ -1,2 +1,2 @@
 Rivendel,Cidade,Bilbo,2,3,10000,20000.0,10.0,15.0
-Rivendel3,Cidade3,Bilbo3,2,3,10000,20000.0,10.0,15.0
+Rivendel,Cidade,Bilbo,2,3,10000,20000.0,10.0,15.0

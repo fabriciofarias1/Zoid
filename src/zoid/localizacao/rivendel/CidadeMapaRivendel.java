@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,6 @@ import javax.swing.ListModel;
 public class CidadeMapaRivendel {
 
     private ArrayList<CidadeMapa> listaCidades;
-   
 
     private CidadeMapaView viewC;
     protected String nomeArq = "test\\zoid.txt";
@@ -93,9 +93,8 @@ public class CidadeMapaRivendel {
             viewC.setTamanho_cidade_jtxt(texto[6]);
             viewC.setPosX_jtxt(texto[7]);
             viewC.setPosY_jtxt(texto[8]);
-            
-            //listaCidades.clear();
 
+            //listaCidades.clear();
         }
 
         @Override
@@ -136,7 +135,7 @@ public class CidadeMapaRivendel {
             }
             BufferedReader br = new BufferedReader(fr);
             CidadeMapa f = new CidadeMapa(nomeArq, nomeArq, nomeArq, 0, 0, 0, 0, 0, 0);
-            
+
             boolean linhaLida = f.carregaLocal(br);
             while (linhaLida) {
                 listaCidades.add(f);
@@ -149,13 +148,13 @@ public class CidadeMapaRivendel {
                 br.close();
             } catch (IOException ex) {
                 Logger.getLogger(CidadeMapaRivendel.class.getName()).log(Level.SEVERE, null, ex);
-                
+
             }
             try {
                 fr.close();
             } catch (IOException ex) {
                 Logger.getLogger(CidadeMapaRivendel.class.getName()).log(Level.SEVERE, null, ex);
-                
+
             }
 
         }
@@ -181,7 +180,7 @@ public class CidadeMapaRivendel {
                 ///--------------------///
                 viewC.addElementoLista(f);
                 ///--------------------///
-                
+
             } catch (Exception e) {
                 System.out.println(e);
 
@@ -195,12 +194,11 @@ public class CidadeMapaRivendel {
     public class SalvarListener implements ActionListener {
 
         //protected boolean append = true;
-
         @Override
         public void actionPerformed(ActionEvent c) {
             try {
                 //------------------//
-                
+
                 FileWriter fw = new FileWriter(nomeArq);
                 Iterator<CidadeMapa> it = listaCidades.iterator();
                 while (it.hasNext()) {
@@ -211,7 +209,7 @@ public class CidadeMapaRivendel {
                 }
                 fw.close();
             } catch (IOException ex) {
-              JOptionPane.showMessageDialog(viewC, "Falha ao salvar o arquivo.");
+                JOptionPane.showMessageDialog(viewC, "Falha ao salvar o arquivo.");
             }
         }
     }
@@ -224,7 +222,7 @@ public class CidadeMapaRivendel {
             viewC.limpar();
         }
     }
-    
+
     public class DeletarListener implements ActionListener {
 
         @Override
@@ -236,18 +234,29 @@ public class CidadeMapaRivendel {
                 model.remove(selectedIndex);
                 //viewC.limpar();
 
-                System.out.println(viewC.getjList1().getModel());
-                int i=0;
+                //System.out.println(viewC.getjList1().getModel());
+                int i = 0;
                 try {
-                    FileWriter fw = new FileWriter(nomeArq);
+                    //FileWriter fw = new FileWriter(nomeArq);
+                    //Scanner scanner = new Scanner(nomeArq).useDelimiter(",");
+                    //String line = scanner.next();
+
+                    //while (i>viewC.getjList1().getModel().getSize()) {
+                    String testoreplace = viewC.getjList1().getModel().toString().replace("[", "").replace("]", "");
+                    
                    
                     
-                    while (i>viewC.getjList1().getModel().getSize()) {
-                       
-                        fw.write(viewC.getjList1().getModel().toString());
-                        fw.close();
-                    }
-                    
+                    String newLine = (testoreplace);
+                    Object texto[] = model.toArray();
+
+                        try (FileWriter writer = new FileWriter(nomeArq)) {
+                            while (i < viewC.getjList1().getModel().getSize()) {
+                                i++;
+                                String line = texto[i].toString();
+                                String replace = line.replace("[", "").replace("]", "");
+                            writer.write(replace + "\r\n");
+                        }
+                      }
 
                 } catch (IOException ex) {
                     Logger.getLogger(CidadeMapaRivendel.class.getName()).log(Level.SEVERE, null, ex);
@@ -256,10 +265,5 @@ public class CidadeMapaRivendel {
             }
         }
     }
-
-
-
-    
-    
 
 }
