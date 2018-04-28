@@ -1,0 +1,3 @@
+Rivendel4,Cidade4,Bilbo4,2,3,10000,20000.0,10.0,15.0
+Rivendel8,Cidade8,Bilbo8,2,3,10000,20000.0,10.0,15.0
+Rivendel9,Cidade9,Bilbo9,2,3,10000,20000.0,10.0,15.0
